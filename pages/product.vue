@@ -6,14 +6,8 @@
       </div>
       <div>
         <ul>
-          <li
-            v-for="item in items"
-            :key="item.id"
-            class="item flex"
-            @click="moveToDetailPage(item.id)"
-          >
-            <img class="product-image" src="item.imageUrl" />
-            <!-- <img class="product-image" src="item.imageUrl" alt="item.name" /> -->
+          <li v-for="item in items" :key="item.id" class="item flex">
+            <img class="product-image" src="item.imageUrl" alt="item.name" />
             <p>{{ item.name }}</p>
             <span>{{ item.price }}</span>
           </li>
@@ -37,14 +31,6 @@ export default {
       }
     })
     return { items }
-  },
-  methods: {
-    moveToDetailPage(id) {
-      console.log(id)
-      // nuxt는 내부적으로 라우터를 품고 있어서 따로 설정하지 않아도 사용 가능
-      // 해당 url 로 이동
-      this.$router.push(`detail/${id}`)
-    },
   },
 }
 </script>
