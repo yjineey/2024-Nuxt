@@ -29,7 +29,6 @@ export default {
   async asyncData() {
     const response = await axios.get('http://localhost:3000/products')
     console.log(response)
-    // const items = response.data
     const items = response.data.map((item) => {
       return {
         ...item,
