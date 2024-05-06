@@ -11,25 +11,28 @@
       <div class="side-panel">
         <p class="name">{{ product.name }}</p>
         <p class="price">{{ product.price }}</p>
-        <button type="button" @click="addToCart">Add to Cart</button>
+        <button type="button" @click="addToCart">카트에 담기</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { fetchProudctById } from '@/api/index'
+import { fetchProductById } from '@/api/index'
 export default {
   // 페이지 진입 전에 사용되므로 this 사용 불가
   // const id = this.$route.params.id;
   async asyncData({ params }) {
-    const response = await fetchProudctById(params.id)
+    const response = await fetchProductById(params.id)
     const product = response.data
     return { product }
   },
-  metohods: {
+  methods: {
     addToCart() {
-      console.log('!!!')
+      // 서버에 product 저장 (새로고침시 불러올 데이터)
+      // const response = await createCartItem(this.product)
+      this.$store.commit('addCartItem', this.product) // 화면에 즉시 띄워줄 값
+      this.$router.push('/cart')
     },
   },
 }

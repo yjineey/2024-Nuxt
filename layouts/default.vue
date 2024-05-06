@@ -1,16 +1,14 @@
 <template>
   <div>
-    <header>
-      <div>
-        <h1>
-          <nuxt-link to="/"> Nuxt Shopping </nuxt-link>
-        </h1>
-      </div>
-    </header>
+    <AppHeader />
     <Nuxt />
   </div>
 </template>
 
-<script></script>
+<script>
+import AppHeader from '@/components/AppHeader.vue'
 
-<style></style>
+export default {
+  components: { AppHeader },
+}
+</script>
