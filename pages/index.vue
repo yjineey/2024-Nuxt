@@ -24,14 +24,14 @@
 <script>
 import axios from 'axios'
 import SearchInput from '@/components/SearchInput.vue'
-import { fetchProductsByKeyword } from '@/api/index'
+import { fetchProducts, fetchProductsByKeyword } from '@/api/index'
 
 export default {
   components: {
     SearchInput,
   },
   async asyncData() {
-    const response = await axios.get('http://localhost:3000/products')
+    const response = await axios.get(fetchProducts)
     console.log(response)
     const items = response.data.map((item) => {
       return {

@@ -2,8 +2,13 @@ import axios from 'axios'
 
 // 공통설정 인스턴스
 const instance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: process.env.baseURL,
 })
+
+// products
+function fetchProducts() {
+  return instance.get('/products')
+}
 
 function fetchProductById(id) {
   return instance.get(`/products/${id}`)
@@ -27,10 +32,9 @@ function createCartItem(cartItem) {
 }
 
 export {
+  fetchProducts,
   fetchProductById,
   fetchProductsByKeyword,
   fetchCartItems,
   createCartItem,
 }
-
-// 서버 데이터를 호출해 오는 방식
