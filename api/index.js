@@ -26,10 +26,11 @@ function createCartItem(cartItem) {
   return instance.post('/carts', cartItem)
 }
 
-// fetchProducts,
 export {
   fetchProductById,
   fetchProductsByKeyword,
   fetchCartItems,
   createCartItem,
 }
+
+// 서버 데이터를 호출해 오는 방식
