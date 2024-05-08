@@ -19,15 +19,15 @@
 
 <script>
 import axios from 'axios'
+import { fetchProducts } from '@/api/index'
+
 export default {
   async asyncData() {
-    const response = await axios.get('http://localhost:3000/products')
-    console.log(response)
-    // const items = response.data
+    const response = await axios.get(fetchProducts)
     const items = response.data.map((item) => {
       return {
         ...item,
-        imageUrl: `${item.imageUrl}?random-${Math.random()}`,
+        imageUrl: `${item.imageUrl}?random=${Math.random()}`,
       }
     })
     return { items }

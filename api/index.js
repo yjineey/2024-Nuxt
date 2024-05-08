@@ -7,7 +7,7 @@ const instance = axios.create({
 
 // products
 function fetchProducts() {
-  return instance.get('/products')
+  return instance.get(`/products`)
 }
 
 function fetchProductById(id) {
