@@ -10,7 +10,6 @@
         <div class="description">
           <p>{{ cart.name }}</p>
           <span>{{ cart.price }}</span>
-          C
         </div>
       </li>
     </ul>

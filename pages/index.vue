@@ -1,7 +1,10 @@
 <template>
   <div class="app">
     <main>
-      <SearchInput v-model="inputText" @search="filterItemsBySearchText" />
+      <SearchInput
+        v-model="inputText"
+        @search="filterItemsBySearchText"
+      ></SearchInput>
       <ul>
         <li
           v-for="item in items"
@@ -9,7 +12,7 @@
           class="item flex"
           @click="routeToDetailPage(item.id)"
         >
-          <img class="product-image" :src="item.imageUrl" />
+          <img class="product-image" :src="item.imageUrl" alt="" />
           <p>{{ item.name }}</p>
           <span>{{ item.price }}</span>
         </li>
@@ -22,43 +25,43 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import SearchInput from '@/components/SearchInput.vue'
 import { fetchProducts, fetchProductsByKeyword } from '@/api/index'
 
 export default {
-  components: {
-    SearchInput,
-  },
+  components: { SearchInput },
+
   async asyncData() {
-    const response = await axios.get(fetchProducts)
-    console.log(response)
-    const items = response.data.map((item) => {
-      return {
+    try {
+      const { data } = await fetchProducts()
+      const items = data.map((item) => ({
         ...item,
         imageUrl: `${item.imageUrl}?random=${Math.random()}`,
-      }
-    })
-    // vue 데이터의 속성으로 정의가 되며 인스턴스의 데이터 속성으로 정의 되어 있다
-    return { items }
+      }))
+      return { items }
+    } catch (error) {
+      const items = []
+      return { items }
+    }
   },
+
   data() {
     return {
       inputText: '',
     }
   },
+
   methods: {
     async filterItemsBySearchText() {
-      const response = await fetchProductsByKeyword(this.inputText)
-      this.items = response.data.map((item) => ({
+      const { data } = await fetchProductsByKeyword(this.inputText)
+      this.items = data.map((item) => ({
         ...item,
         imageUrl: `${item.imageUrl}?random=${Math.random()}`,
       }))
     },
     routeToDetailPage(id) {
-      console.log(id)
-      // nuxt는 내부적으로 라우터를 품고 있어서 따로 설정하지 않아도 사용 가능
-      this.$router.push(`detail/${id}`)
+      this.$router.push(`/product/${id}`)
     },
     routeToCartPage() {
       this.$router.push('/cart')
